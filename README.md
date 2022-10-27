@@ -1,20 +1,9 @@
-Fetches favicon of a specified web site and saves it into a specified directory.  
-To run the program as a standalone specify a website and directory as follows:
+Fetches favicon from www.python.org website and saves it into ```/tmp/favicon``` directory.  To run the application:  
+Build an image and tag it as ```favicon```:
 ```
-python main.py --src="<website>" --dst="<dest>"
+docker build -t favicon .
 ```
-e. g.
+When creating a container specify a source directory on your host and bind it with ```/tmp/favicon``` directory inside a container:
 ```
-python main.py --src="https://www.python.org/" --dst="/tmp/favicon"
+docker run -d --name favicon --mount type=bind,source="$(pwd)"/data,target=/tmp/favicon favicon:latest
 ```
-
-docker build .
-
-
-docker run -d -p 9090:80 -p 9999:8080 --mount source=nginx-vol,target=/var/log/nginx/ --name=nginx_test nginx
-
-
-Tag obtained image as "favicon"
-
-
-docker run -d --name favicon --mount type=bind,source="$(pwd)",target=/tmp/favicon favicon:latest
